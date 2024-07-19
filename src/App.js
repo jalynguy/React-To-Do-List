@@ -33,7 +33,7 @@ export default function App(){
         }
     }
 
-    function AddNewToDo(title){
+    function AddNewToDo(title, description){
         updateItemCount('add');
         return [
             setTodos((currentToDos) => {
@@ -42,6 +42,7 @@ export default function App(){
                         id: crypto.randomUUID(),
                         title,
                         completed: false,
+                        description,
                         dateAdded: getCurrentDate()
                     }
                 ]

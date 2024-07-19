@@ -10,8 +10,28 @@ button{
     justify-content: center;
 }
 .table-container{
-    width:40%;
+    width:70%;
 }
-.header{
-    text-align: left;
+.popup-content{
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+.detail-header{
+    border: 1px solid black;
+}
+form{
+    width: 60%;
+    margin: auto;
+}
+input{
+    margin-top:2%;
+    box-sizing: border-box;
+    width: 90%;
+}
+.TextField{
+    margin-top:2%;
+    box-sizing: border-box;
+    width: 90%;
+    border: 1px solid black;
 }
