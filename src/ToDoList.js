@@ -6,24 +6,15 @@ export default function ToDoList(props){
         <>   
             <ToDoCounter itemCount={props.itemCount}/>      
             <div className="d-flex justify-content-center">
-                <Table className="table-container" striped bordered hover>
+                <Table className="table-container" striped bordered hover responsive>
                     <thead>
                         <tr>
-                            <th> 
-                            Is Done? 
-                            </th >
-                            <th>
-                                To Do Item
-                            </th>
-                            <th>
-                                Date Added
-                            </th>
-                            <th>
-                                Details
-                            </th>
-                            <th>
-                                Delete
-                            </th>
+                            <th> In-Progress? </th >
+                            <th> To Do Item</th>
+                            <th> Date Added</th>
+                            <th> Details</th>
+                            <th> Delete</th>
+                            <th> Mark Task as Completed </th>
                         </tr>
                     </thead>
                     <tbody>

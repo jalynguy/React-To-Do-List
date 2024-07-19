@@ -10,6 +10,7 @@ export default function ToDoItems(props){
                 <td> {props.dateAdded} </td>
                 <td> <ToDoInfoPopup title={props.title} completed={props.completed} dateAdded={props.dateAdded} description={props.description}/> </td>
                 <td> <button className='btn btn-danger btn-sm' onClick={()=> props.deleteItem(props.id)}  style={{marginLeft:"10px", background:'red', color:'white'}}>  <i className="bi bi-trash"> </i>  Delete </button> </td>
+                <td> <button className="btn btn-success btn-sm"> <i className="bi bi-check2-square"></i></button></td>
             </tr>
     )
 }

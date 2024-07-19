@@ -9,6 +9,8 @@ export default function ToDoForm(props){
         e.preventDefault();
         if(newItem !== ""){
             props.onSubmit(newItem, newDescription);
+            setNewItem("")
+            setNewDescription("")
         }
         else{
             console.log("Item left blank!")
