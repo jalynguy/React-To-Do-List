@@ -35,3 +35,7 @@ input{
     width: 90%;
     border: 1px solid black;
 }
+.completed-task-list{
+    width:75%;
+    margin: auto;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import './App.css'
 import ToDoForm from "./ToDoForm.js";
 import ToDoList from './ToDoList.js'
+import CompletedToDos from "./CompletedToDos.js";
 
 
 export default function App(){
@@ -20,10 +21,21 @@ export default function App(){
         return result.length;
     })
 
+    const [completedItems, setCompletedItems] = useState(()=>{
+        const localValue = localStorage.getItem("COMPLETEDITEMS")
+        if(localValue == null) return []
+        return JSON.parse(localValue);
+    })
+
+    useEffect(()=> {
+        localStorage.setItem("COMPLETEDITEMS", JSON.stringify(completedItems))
+    }, [completedItems])
+
     useEffect(() => {
         localStorage.setItem("ITEMS", JSON.stringify(toDos))
     }, [toDos])
 
+    // Function to update the counter
     function updateItemCount(val){
         if(val === 'add'){
             return setItemCount(itemCount + 1);
@@ -33,6 +45,7 @@ export default function App(){
         }
     }
 
+    // Add Functions
     function AddNewToDo(title, description){
         updateItemCount('add');
         return [
@@ -42,12 +55,26 @@ export default function App(){
                         id: crypto.randomUUID(),
                         title,
                         completed: false,
+                        in_progress: false,
                         description,
                         dateAdded: getCurrentDate()
                     }
                 ]
             })
         ]
+    }
+
+    function addNewCompleted(id, title){
+        deleteItem(id);
+        setCompletedItems(currentCompletedItems=>{
+            return [
+                ...currentCompletedItems, {
+                    id,
+                    title,
+                    dateCompleted : getCurrentDate()
+                }
+            ]
+        })
     }
 
     function getCurrentDate(){
@@ -59,21 +86,31 @@ export default function App(){
         return today;
     }
 
-    function toggleCompleted(id, completed){
+    // TODO:  IN PROGRESS FUNCTION
+    function toggleInProgress(id, in_progress){
+  
         setTodos(currentToDos=>{
             return currentToDos.map(todo =>{
                 if(todo.id === id){
-                    return {...todo, completed}
+                    return {...todo, in_progress}
                 }
                 return todo
             })
         })
     }
 
+
+    // Delete Functions
     function deleteItem(id){
         updateItemCount('subtract');
         setTodos(currentToDos=>{
             return currentToDos.filter(todo => todo.id !== id)
+        })
+    }
+
+    function deleteCompletedItem(id){
+        setCompletedItems(currentCompletedItems=>{
+            return currentCompletedItems.filter(completedItems => completedItems.id !== id)
         })
     }
     return (
@@ -83,8 +120,12 @@ export default function App(){
                 <ToDoForm onSubmit={AddNewToDo}/>
                 <br/>
                 <br/>
-                <ToDoList toDos = {toDos} toggleCompleted={toggleCompleted} deleteItem={deleteItem} itemCount={itemCount}/>
+                <ToDoList toDos = {toDos} toggleInProgress={toggleInProgress} deleteItem={deleteItem} itemCount={itemCount} addNewCompleted={addNewCompleted}/>
+                <br/>
+                <br/>
+                <br/>
             </div>
+            <CompletedToDos completedItems={completedItems} deleteCompletedItem={deleteCompletedItem}/>
         </>
     ) 
 }

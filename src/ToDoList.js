@@ -19,7 +19,7 @@ export default function ToDoList(props){
                     </thead>
                     <tbody>
                         {props.toDos.map(toDos=>{
-                            return <ToDoItems id={toDos.id} title={toDos.title} completed={toDos.completed} dateAdded={toDos.dateAdded} description={toDos.description} toggleCompleted={props.toggleCompleted} deleteItem={props.deleteItem} />
+                            return <ToDoItems id={toDos.id} title={toDos.title} completed={toDos.completed} dateAdded={toDos.dateAdded} description={toDos.description} toggleInProgress={props.toggleInProgress} deleteItem={props.deleteItem} in_progress={toDos.in_progress} addNewCompleted={props.addNewCompleted}/>
                             })
                         }
                     </tbody>

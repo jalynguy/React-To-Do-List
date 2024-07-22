@@ -17,7 +17,7 @@ export default function ToDoInfoPopup(props){
                                 <p> Date Added: {props.dateAdded} </p>
                             </div>
                             <div>
-                                Completed: { props.completed ? <p style={{color: "green"}}> True </p> : <p style={{color: "red"}}> False </p>}
+                                Status: { props.in_progress === true ? <p style={{color: "green"}}> In Progress </p> : <p style={{color: "red"}}> Not Started </p>}
                             </div>
                             <div className='Details'>
                                 <div> 
